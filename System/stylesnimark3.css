@@ -1,0 +1,161 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: url('bgictc.png') no-repeat center center fixed;
+    background-size: cover;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 42vh;
+}
+
+h1 {
+    background-color: #333;
+    color: #ffffff;
+    padding: 20px;
+    text-align: center;
+    margin: 0;
+}
+
+table {
+    border-collapse: collapse;
+    width: 80%;
+    margin: 10px auto;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center; /* Center-align table cells */
+}
+
+th {
+    background-color: #333;
+    color: #fff;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+tr:hover {
+    background-color: #ddd;
+}
+
+.report-button {
+    background-color: #fff;
+    color: #4CAF50;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 20px auto;
+    display: block;
+}
+
+.report-button:hover {
+    background-color: #2E8B57;
+    color: #fff;
+}
+
+/* Center the filter input */
+#filterInput {
+    margin: 0 auto;
+    display: block;
+    padding: 10px;
+    width: 80%;
+    text-align: center;
+}
+
+/* New Navbar styles */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 999;
+    background-color: rgba(20, 89, 1, 0.401);
+}
+
+.navbar-brand {
+    display: flex;
+    align-items: center;
+    color: #fff;
+    margin-left: 20px;
+}
+
+.navbar-brand img {
+    height: 30px;
+    margin-right: 10px;
+}
+
+.navbar-nav .nav-link {
+    position: relative;
+    color: #fff;
+    text-decoration: none;
+}
+
+.navbar-nav .nav-link::before {
+    content: "";
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: #fff;
+    transition: width 0.3s ease;
+}
+
+.navbar-nav .nav-link:hover::before {
+    width: 100%;
+}
+
+/* Adjustments */
+.navbar-nav {
+    flex-direction: row;
+    margin-left: auto;
+}
+
+.navbar-nav .nav-item {
+    margin-right: 20px;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 0;
+    z-index: 1000;
+    display: none;
+}
+
+.dropdown-menu.show {
+    display: block;
+}
+
+
+#reportsDropdown {
+    /* The key is to ensure that hovering doesn't change the layout */
+    position: relative;
+    z-index: 9999;
+}
+
+#reportsDropdown + .dropdown-menu {
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 0;
+    z-index: 1000;
+    display: 1;
+}
+
+#reportsDropdown:hover + .dropdown-menu {
+    display: block;
+}
+
+.nav-item.dropdown:hover .dropdown-menu {
+display: block;
+}
+

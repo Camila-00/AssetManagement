@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <title>Asset Borrowing System</title>
+    <style>
+        /* Your existing styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: url('bgictc.png') no-repeat center center fixed;
+            background-size: cover;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 30vh;
+        }
+
+        /* New Navbar styles */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 999;
+            background-color: rgba(20, 89, 1, 0.401);
+        }
+
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            color: #fff;
+            margin-left: 20px;
+        }
+
+        .navbar-brand img {
+            height: 30px;
+            margin-right: 10px;
+        }
+
+        .navbar-nav .nav-link {
+            position: relative;
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .navbar-nav .nav-link::before {
+            content: "";
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #fff;
+            transition: width 0.3s ease;
+        }
+
+        .navbar-nav .nav-link:hover::before {
+            width: 100%;
+        }
+
+        /* Adjustments */
+        .navbar-nav {
+            flex-direction: row;
+            margin-left: auto;
+        }
+
+        .navbar-nav .nav-item {
+            margin-right: 20px;
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: calc(100% + 10px);
+            left: 0;
+            z-index: 1000;
+            display: none;
+        }
+
+        .dropdown-menu.show {
+            display: block;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 90%;
+            margin: 60px; /* Center the table horizontally */
+            background-color: #000000;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 90px; /* Adjust the padding for centering vertically */
+        }
+
+        th, td {
+            border: 1px solid #000000;
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #000000;
+            color: #fff;
+        }
+
+        tr:nth-child(even) {
+            background-color: #000000;
+        }
+
+        tr:hover {
+            background-color: #ddd;
+        }
+        
+   #reportsDropdown {
+            /* The key is to ensure that hovering doesn't change the layout */
+            position: relative;
+            z-index: 9999;
+        }
+
+        #reportsDropdown + .dropdown-menu {
+            position: absolute;
+            top: calc(100% + 10px);
+            left: 0;
+            z-index: 1000;
+            display: 1px;
+        }
+
+        #reportsDropdown:hover + .dropdown-menu {
+            display: block;
+        }
+
+        .nav-item.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a class="navbar-brand" href="#">
+            <img src="DLSUDLOGO.png" alt="Logo">
+            ICTC Asset Management
+        </a>
+        <ul class="navbar-nav">
+            <li class="nav-item"><a class="nav-link" href="indexfacultyhomepage.html">Home</a></li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" id="reportsDropdown" aria-expanded="false">
+                    Reports
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="reportsDropdown">
+                    <li><a class="dropdown-item" href="indexfacultyreport.html">Data</a></li>
+                    <li><a class="dropdown-item" href="indexfacultyreportinput.html">Input</a></li>
+                </ul>
+            </li>
+            <li class="nav-item"><a class="nav-link" href="indexwelcome.html">Logout</a></li>
+            <li class="nav-item"><a class="nav-link" href="mainboard.html">Renting</a></li>
+        </ul>
+    </nav>
+
+    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+        <div id="content">
+            <table border="1" id="asset-list" class="mx-auto"> <!-- Added mx-auto to center the table -->
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>UserID</th>
+                        <th>Asset Type</th>
+                        <th>Barcode</th>
+                        <th>Borrow Date</th>
+                        <th>Return Date</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Data will be loaded here via JavaScript -->
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <script>
+       document.addEventListener('DOMContentLoaded', function () {
+        var reportsDropdown = document.getElementById('reportsDropdown');
+        var dropdownMenu = reportsDropdown.nextElementSibling; // Get the sibling .dropdown-menu
+
+        var mouseInDropdown = false;
+
+        reportsDropdown.addEventListener('click', function (event) {
+            event.preventDefault();
+            dropdownMenu.classList.toggle('show');
+        });
+
+        reportsDropdown.addEventListener('mouseenter', function () {
+            mouseInDropdown = true;
+            dropdownMenu.classList.add('show');
+        });
+
+        dropdownMenu.addEventListener('mouseenter', function () {
+            mouseInDropdown = true;
+            dropdownMenu.classList.add('show');
+        });
+
+        reportsDropdown.addEventListener('mouseleave', function () {
+            mouseInDropdown = false;
+            setTimeout(function () {
+                if (!mouseInDropdown) {
+                    dropdownMenu.classList.remove('show');
+                }
+            }, 200); // Adjust the delay as needed
+        });
+
+        dropdownMenu.addEventListener('mouseleave', function () {
+            mouseInDropdown = false;
+            setTimeout(function () {
+                if (!mouseInDropdown) {
+                    dropdownMenu.classList.remove('show');
+                }
+            }, 200); // Adjust the delay as needed
+        });
+
+        // Close the dropdown when clicking outside the dropdown or the "Reports" button
+        document.addEventListener('click', function (event) {
+            if (!event.target.matches('#reportsDropdown') && !mouseInDropdown) {
+                dropdownMenu.classList.remove('show');
+            }
+        });
+
+
+            function fetchData() {
+        const assetList = document.querySelector("#asset-list tbody");
+
+        fetch('/assets')
+            .then((response) => response.json())
+            .then((assets) => {
+                assetList.innerHTML = assets.map((asset) => `
+                    <tr>
+                        <td>${asset.name}</td>
+                        <td>${asset.email}</td>
+                        <td>${asset.usernum}</td>
+                        <td>${asset.asset_type}</td>
+                        <td>${asset.barcode}</td>
+                        <td>${asset.borrow_date}</td>
+                        <td>${asset.return_date}</td>
+                        <td>${asset.status}</td>
+                        <td>
+                            <button class="update-button" data-id="${asset._id}">UPDATE</button>
+                            <button class="delete-button" data-id="${asset._id}">DELETE</button>
+                            <button class="sendemail-button" data-id="${asset._id}">EMAIL</button>
+                        </td>
+                    </tr> 
+                `).join('');
+
+                // Add event listeners for the buttons
+                document.querySelectorAll('.update-button').forEach((button) => {
+                    button.addEventListener('click', handleUpdate);
+                });
+
+                document.querySelectorAll('.delete-button').forEach((button) => {
+                    button.addEventListener('click', handleDelete);
+                });
+
+                document.querySelectorAll('.sendemail-button').forEach((button) => {
+                    button.addEventListener('click', () => handleEmail(asset._id));
+                });
+            })
+            .catch((error) => {
+                console.error("Error fetching assets:", error);
+            });
+    }
+    
+        function handleUpdate(event) {
+            const assetId = event.target.getAttribute('data-id');
+            const newStatus = prompt('Enter status:'); // You can use a better UI for this
+            if (newStatus !== null) {
+                const updatedAsset = { status: newStatus };
+                
+    
+                fetch(`/assetsupdate/${assetId}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(updatedAsset),
+                })
+                .then((response) => response.json())
+                .then((data) => {
+                    console.log(data.message);
+                    fetchData(); // Refresh the data after update
+                })
+                .catch((error) => {
+                    console.error('Error updating asset:', error);
+                });
+            }
+        }
+    
+        function handleDelete(event) {
+            const assetId = event.target.getAttribute('data-id');
+            const confirmDelete = confirm('Are you sure you want to delete this asset?');
+            if (confirmDelete) {
+                fetch(`/assetdelete/${assetId}`, {
+                    method: 'DELETE',
+                })
+                .then((response) => response.json())
+                .then((data) => {
+                    console.log(data.message);
+                    fetchData(); // Refresh the data after delete
+                })
+                .catch((error) => {
+                    console.error('Error deleting asset:', error);
+                });
+            }
+        }
+        function handleEmail(assetId) {
+        fetch(`/sendemail/${assetId}`, {
+            method: 'POST'
+        })
+        .then((response) => response.json())
+        .then((data) => {
+            console.log(data.message);
+            // You can display a notification or perform other actions after sending the email
+        })
+        .catch((error) => {
+            console.error('Error sending email:', error);
+        });
+    }
+        });
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+</body>
+</html>

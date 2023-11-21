@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asset Input System</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+
+body {
+    /* Green gradient background */
+    background-image: url('bgictc.png'); /* Replace with your background image URL */
+    background-size: cover;
+    color: #fff; /* Text color */
+    font-family: Arial, sans-serif; /* Font family */
+    padding-top: 20px; /* Add some padding to the top */
+}
+.container {
+    max-width: 600px; /* Adjust container width */
+    background-color: rgba(20, 89, 1, 0.336); /* Semi-transparent container */
+    padding: 20px; /* Add padding */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add shadow */
+    margin: auto; /* Center the container */
+}
+
+h1 {
+    font-size: 2.5em; /* Increase heading size */
+    margin-bottom: 30px; /* Add space below heading */
+}
+
+/* Input fields style */
+.form-control {
+    margin-bottom: 15px; /* Add space between input fields */
+}
+
+/* Custom button style */
+.btn-custom {
+    margin-top: 10px; /* Add some margin between buttons and inputs */
+    padding: 10px 20px; /* Adjust button padding */
+    background-color: #fff; /* Button background color */
+    color: #4CAF50; /* Button text color */
+    border: none; /* Remove border */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Add cursor pointer */
+    transition: background-color 0.3s ease; /* Smooth transition */
+}
+
+.btn-custom:hover {
+    background-color: #2E8B57; /* Change background color on hover */
+    color: #fff; /* Change text color on hover */
+}
+
+/* New Navbar styles */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 999;
+    background-color: rgba(20, 89, 1, 0.401);
+}
+
+.navbar-brand {
+    display: flex;
+    align-items: center;
+    color: #fff;
+    margin-left: 20px;
+}
+
+.navbar-brand img {
+    height: 30px;
+    margin-right: 10px;
+}
+
+.navbar-nav .nav-link {
+    position: relative;
+    color: #fff;
+    text-decoration: none;
+}
+
+.navbar-nav .nav-link::before {
+    content: "";
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: #fff;
+    transition: width 0.3s ease;
+}
+
+.navbar-nav .nav-link:hover::before {
+    width: 100%;
+}
+
+/* Adjustments */
+.navbar-nav {
+    flex-direction: row;
+    margin-left: auto;
+}
+
+.navbar-nav .nav-item {
+    margin-right: 20px;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 0;
+    z-index: 1000;
+    display: none;
+}
+
+.dropdown-menu.show {
+    display: block;
+}
+
+
+#reportsDropdown {
+    /* The key is to ensure that hovering doesn't change the layout */
+    position: relative;
+    z-index: 9999;
+}
+
+#reportsDropdown + .dropdown-menu {
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 0;
+    z-index: 1000;
+    display: 1;
+}
+
+#reportsDropdown:hover + .dropdown-menu {
+    display: block;
+}
+
+.nav-item.dropdown:hover .dropdown-menu {
+display: block;
+}
+
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a class="navbar-brand" href="#">
+            <img src="DLSUDLOGO.png" alt="Logo">
+            ICTC Asset Management
+        </a>
+        <ul class="navbar-nav">
+            <li class="nav-item"><a class="nav-link" href="indexfacultyhomepage.html">Home</a></li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" id="reportsDropdown" aria-expanded="false">
+                    Reports
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="reportsDropdown">
+                    <li><a class="dropdown-item" href="indexfacultyreport.html">Data</a></li>
+                    <li><a class="dropdown-item" href="indexfacultyreportinput.html">Input</a></li>
+                </ul>
+            </li>
+            <li class="nav-item"><a class="nav-link" href="indexwelcome.html">Logout</a></li>
+            <li class="nav-item"><a class="nav-link" href="mainboard.html">Renting</a></li>
+        </ul>
+    </nav>
+
+<div class="main-content">
+    <div class="container mt-5">
+        <h1>Asset Input System</h1>
+        <form id="assetForm">
+            <div class="mb-3">
+                <label for="room">Room:</label>
+                <select class="form-control" id="room" name="room" required>
+                    <option value="201">201</option>
+                    <option value="202">202</option>
+                    <option value="203">203</option>
+                    <option value="204">204</option>
+                    <option value="205">205</option>
+                    <option value="206">206</option>
+                    <option value="207">207</option>
+                    <option value="208">208</option>
+                    <option value="209">209</option>
+                    <option value="210">210</option>
+                    <option value="211">211</option>
+                    <option value="212">212</option>
+                    <option value="213">213</option>
+                </select>
+            </div>
+            
+            <div class="mb-3">
+                <label for="location">Location:</label>
+                <input type="text" class="form-control" id="location" name="location" required>
+            </div>
+            <div class="mb-3">
+                <label for="category">Category #:</label>
+                <input type="text" class="form-control" id="category" name="category" required>
+            </div>
+            <div>
+                <label for="bundle">Bundle:</label>
+                <input type="checkbox" id="bundleCheckbox" name="bundle">
+                <label for="bundleCheckbox">Yes</label> 
+            </div>
+            <div class="mb-3">
+                <label for="item_description">Item Description:</label>
+                <input type="text" class="form-control" id="item_description" name="item_description" required>
+            </div>
+            <div class="mb-3">
+                <label for="property_number">Property Number:</label>
+                <input type="text" class="form-control" id="property_number" name="property_number" required>
+            </div>
+            <div class="mb-3">
+                <label for="serial_number">Serial Number:</label>
+                <input type="text" class="form-control" id="serial_number" name="serial_number" required>
+            </div>
+            <div class="mb-3">
+                <label for="unit_cost">Unit Cost:</label>
+                <input type="text" class="form-control" id="unit_cost" name="unit_cost" required>
+            </div>
+            <div class="mb-3">
+                <label for="rdf_number">RDF Number:</label>
+                <input type="text" class="form-control" id="rdf_number" name="rdf_number">
+            </div>
+            <div class="mb-3">
+                <label for="rtf_number">RTF Number:</label>
+                <input type="text" class="form-control" id="rtf_number" name="rtf_number">
+            </div>
+            <div class="mb-3">
+                <label for="unit_status">Status:</label>
+                <input type="text" class="form-control" id="unit_status" name="unit_status" required>
+            </div>
+            <div class="mb-3">
+                <label for="accountability">Accountability:</label>
+                <input type="text" class="form-control" id="accountability" name="accountability" required>
+            </div>
+            <button type="submit" class="btn btn-custom">Add Asset</button>
+            <button type="button" id="resetButton" class="btn btn-custom">Clear</button>
+<!--<button class="btn btn-custom" onclick="window.location.href='indexfacultyreportinput.html'">Reports</button>indexfacultyreport.html-->
+<!--<button class="btn btn-custom" onclick="window.location.href='indexfacultyhomepage.html'">Dashboard</button>-->
+
+</form>
+            <div id="successMessage" class="alert alert-success" style="display: none;">Data stored successfully.</div>
+            <div id="errorMessage" class="alert alert-danger" style="display: none;"></div>
+        </div>
+    </div>
+
+    <script>
+
+document.addEventListener('DOMContentLoaded', function () {
+        var reportsDropdown = document.getElementById('reportsDropdown');
+        var dropdownMenu = reportsDropdown.nextElementSibling; // Get the sibling .dropdown-menu
+
+        var mouseInDropdown = false;
+
+        reportsDropdown.addEventListener('click', function (event) {
+            event.preventDefault();
+            dropdownMenu.classList.toggle('show');
+        });
+
+        reportsDropdown.addEventListener('mouseenter', function () {
+            mouseInDropdown = true;
+            dropdownMenu.classList.add('show');
+        });
+
+        dropdownMenu.addEventListener('mouseenter', function () {
+            mouseInDropdown = true;
+            dropdownMenu.classList.add('show');
+        });
+
+        reportsDropdown.addEventListener('mouseleave', function () {
+            mouseInDropdown = false;
+            setTimeout(function () {
+                if (!mouseInDropdown) {
+                    dropdownMenu.classList.remove('show');
+                }
+            }, 200); // Adjust the delay as needed
+        });
+
+        dropdownMenu.addEventListener('mouseleave', function () {
+            mouseInDropdown = false;
+            setTimeout(function () {
+                if (!mouseInDropdown) {
+                    dropdownMenu.classList.remove('show');
+                }
+            }, 200); // Adjust the delay as needed
+        });
+
+        // Close the dropdown when clicking outside the dropdown or the "Reports" button
+        document.addEventListener('click', function (event) {
+            if (!event.target.matches('#reportsDropdown') && !mouseInDropdown) {
+                dropdownMenu.classList.remove('show');
+            }
+        });
+
+
+
+
+document.addEventListener('DOMContentLoaded', function () {
+        var dropdowns = document.querySelectorAll('.dropdown-toggle');
+        dropdowns.forEach(function (dropdown) {
+            dropdown.addEventListener('click', function () {
+                dropdown.nextElementSibling.classList.toggle('show');
+            });
+        });
+    });
+
+        document.addEventListener("DOMContentLoaded", async function() {
+            fetchData();
+            const assetForm = document.getElementById("assetForm");
+            const successMessage = document.getElementById("successMessage");
+            const errorMessage = document.getElementById("errorMessage");
+            const assetTableBody = document.getElementById("assetTableBody");
+    
+            assetForm.addEventListener("submit", async function(event) {
+                event.preventDefault(); // Prevent the default form submission
+    
+                // Retrieve user input
+                const room = document.getElementById("room").value;
+                const location = document.getElementById("location").value;
+                const category = document.getElementById("category").value;
+                const item_description = document.getElementById("item_description").value;
+                const property_number = document.getElementById("property_number").value;
+                const serial_number = document.getElementById("serial_number").value;
+                const unit_cost = document.getElementById("unit_cost").value;
+                const rdf_number = document.getElementById("rdf_number").value;
+                const rtf_number = document.getElementById("rtf_number").value;
+                const unit_status = document.getElementById("unit_status").value;
+                const accountability = document.getElementById("accountability").value;
+                const bundleCheckbox = document.getElementById("bundleCheckbox");
+                const bundle = bundleCheckbox.checked ? "Yes" : "No";
+                try {
+                    // Send a POST request to your server to handle input
+                    const response = await fetch("/indexinput1", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({ room, location, category, item_description, bundle, property_number, serial_number, unit_cost, rdf_number, rtf_number, unit_status, accountability }), // Include "server" in the request body
+                    });
+                    if (response.ok) {
+                        console.log("Success");
+                        successMessage.style.display = "block";
+                        assetForm.reset();
+                        successMessage.style.opacity = "1";
+                        setTimeout(function () {
+                            successMessage.style.opacity = "0";
+                            setTimeout(function () {
+                        successMessage.style.display = "none";
+                    }, 300); // Adjust this time to match your transition duration
+                }, 2000);
+                    } else {
+                        console.error("Failed to submit asset.");
+                        errorMessage.textContent = "Failed to submit asset.";
+                        errorMessage.style.display = "block";
+                    }
+                } catch (error) {
+                    console.error("Error during asset submission:", error);
+                    errorMessage.textContent = "An error occurred.";
+                    errorMessage.style.display = "block";
+                }
+            });
+    
+            const resetButton = document.getElementById("resetButton");
+    
+            resetButton.addEventListener("click", function () {
+                assetForm.reset();
+                assetTableBody.innerHTML = "";
+                successMessage.style.display = "none";
+                errorMessage.style.display = "none"; // Fix the syntax error here
+            });
+        });
+    
+        // Function to fetch and display data from the server
+        async function fetchData() {
+            // Your fetch data function remains the same
+        }
+    
+        // Call the fetchData function when the page loads
+        document.addEventListener("DOMContentLoaded", function() {
+            fetchData();
+        });
+    });
+    </script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+</body>
+</html>

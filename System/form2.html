@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form 2</title>
+</head>
+<body>
+    <h2>Form 2</h2>
+    <form id="form2">
+        Name: <input type="text" id="name2" required><br>
+        Email: <input type="email" id="email2" required><br>
+    </form>
+
+    <script>
+        // Get user data from the URL
+        const params = new URLSearchParams(window.location.search);
+        const name = params.get('name');
+        const email = params.get('email');
+
+        // Set user data in the second form
+        document.getElementById('name2').value = name;
+        document.getElementById('email2').value = email;
+    </script>
+</body>
+</html>

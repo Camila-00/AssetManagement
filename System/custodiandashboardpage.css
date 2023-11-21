@@ -1,0 +1,237 @@
+body {
+    /* Green gradient background */
+    background-image: url('bgictc.png'); /* Replace with your background image URL */
+    background-size: cover;
+    color: #fff; /* Text color */
+    font-family: Arial, sans-serif; /* Font family */
+}
+
+/* New Navbar styles */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width:100%;
+    z-index: 999;
+    background-color: rgba(20, 89, 1, 0.401);
+}
+
+.navbar-brand {
+    display: flex;
+    align-items: center;
+    color: #ffffff;
+    margin-left: 20px;
+}
+
+.navbar-brand img {
+    height: 30px;
+    margin-right: 10px;
+}
+
+.navbar-nav .nav-link {
+    position: relative;
+    color: #fff;
+    text-decoration: none;
+}
+
+.navbar-nav .nav-link::before {
+    content: "";
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: #fff;
+    transition: width 0.3s ease;
+}
+
+.navbar-nav .nav-link:hover::before {
+    width: 100%;
+}
+
+.navbar-nav {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar-nav .nav-item{
+    margin-right: 20px;
+    display: inline;
+    flex-direction: row;
+}
+
+.nav-link {
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 15px;
+    display: inline-block;
+
+}
+
+
+
+.dropdown-menu {
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 0;
+    z-index: 1000;
+    display: none;
+}
+
+.dropdown-menu.show {
+    display: block;
+}
+
+
+#reportsDropdown {
+    /* The key is to ensure that hovering doesn't change the layout */
+    position: relative;
+    z-index: 9999;
+}
+
+#reportsDropdown + .dropdown-menu {
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 0;
+    z-index: 1000;
+    display: 1;
+}
+
+#reportsDropdown:hover + .dropdown-menu {
+    display: block;
+}
+
+.nav-item.dropdown:hover .dropdown-menu {
+display: block;
+}
+
+table {
+    border-collapse: collapse;
+    width: 80%;
+    margin: 20px auto;
+    background-color: #000000;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.264);
+    border-radius: 10px; /* Rounded corners */
+    overflow: hidden; /* Ensure rounded corners are visible */
+}
+
+th, td {
+    padding: 10px;
+    text-align: center; /* Center align table cells */
+    border: none; /* Remove borders */
+}
+
+th {
+    background-color: #2E8B57; /* Green accent color */
+    color: #f6f6f6; /* White text */
+    border-radius: 10px 10px 0 0; /* Rounded corners for header */
+}
+
+tr:not(:first-child) td {
+    border-top: 1px solid #000000; /* Add top border to every td in rows except the first */
+}
+
+td:not(:first-child) {
+    border-left: 1px solid #000000; /* Add left border to every td in columns except the first */
+}
+
+thead tr {
+    background-color: transparent; /* Remove background color from the first row */
+}
+
+
+tr:nth-child(even) {
+    background-color: #272727;
+}
+
+tr:hover {
+    background-color: #464646;
+}
+/* Print button */
+.report-button {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Print button */
+.report-button {
+    display: inline-block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    text-decoration: none; /* To remove underlines if button used as a link */
+}
+/* Filter input field */
+#searchInput {
+    display: inline-block;
+    margin-right: 10px; /* Adjust the spacing between the input and button */
+    padding: 10px;
+    width: calc(60% - 10px); /* Adjust width to account for margin */
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    transition: border-color 0.3s ease;
+}
+
+#searchInput:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* Print button */
+.report-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    text-decoration: none; /* To remove underlines if button used as a link */
+}
+
+.report-button:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+}
+
+.report-button:active {
+    transform: translateY(1px);
+}
+
+/* Container to hold both filter input and print button */
+.filter-print-container {
+    text-align: center; /* Align the content horizontally */
+    margin-bottom: 20px; /* Optional: Add some space between the filter and the table */
+}
+
+/* CSS for the Faculty Dashboard */
+h1 {
+    text-align: center;
+    color
+    : white 
+    !important
+    ; 
+    /* Use !important to override other styles */
+    
+    }

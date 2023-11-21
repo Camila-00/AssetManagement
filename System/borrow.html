@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Borrow Asset Form</title>
+    <link rel="stylesheet" href="borrowing.css"> <!-- FOR LOGIN DESIGN -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-success">
+          <a class="navbar-brand text-white" href="indexwelcome.html">
+            <img src="DLSUDLOGO.png" alt="DLSUD Logo"> 
+            ICTC Asset Management System
+          </a>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item">
+                  <a class="nav-link text-white" href="indexwelcome.html">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-white" href="indexlogin.html">Login</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-white" href="borrow.html">Renting</a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+    </header>
+
+    <div class="container">
+        <h1>Borrow Asset Form</h1>
+        <form id="borrowForm" action="/indexborrow" method="post">
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+                <label for="usernum">User ID:</label>
+                <input type="text" id="usernum" name="usernum" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+                <label for="asset_type">Asset Type:</label>
+                <select id="asset_type" name="asset_type" class="form-control" required>
+                    <option value="Laptop">Laptop</option>
+                    <option value="Projector">Projector</option>
+                    <option value="iPad">iPad</option>
+                    <option value="Floor Mounted Server">Floor Mounted Server</option>
+                    <option value="Server Rack">Server Rack</option>
+                    <option value="Monitor">Monitor</option>
+                    <option value="Computer">Computer</option>
+                    <option value="Mouse">Mouse</option>
+                    <option value="Keyboard">Keyboard</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="barcode">Barcode:</label>
+                <input type="text" id="barcode" name="barcode" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+                <label for="borrow_date">Borrow Date:</label>
+                <input type="date" id="borrow_date" name="borrow_date" class="form-control" readonly>
+            </div>
+
+            <div class="form-group">
+                <label for="return_date">Return Date:</label>
+                <input type="date" id="return_date" name="return_date" class="form-control" readonly>
+            </div>
+
+            <div id="notification"></div>
+            <button type="submit" class="btn btn-primary" id="submitBtn">Borrow Asset</button>
+            <button type="reset" class="btn btn-reset" id="resetButton">Reset</button>
+        </form>
+    </div>
+    <div id="successMessage" class="alert alert-success" role="alert" style="display: none;">
+        Asset stored successfully.
+    </div>
+    
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const borrowForm = document.getElementById("borrowForm");
+    
+            function setDefaultDateValues() {
+                const currentDate = new Date();
+                const formattedDate = currentDate.toISOString().split('T')[0];
+                document.getElementById("borrow_date").value = formattedDate;
+                document.getElementById("return_date").value = formattedDate;
+            }
+    
+            setDefaultDateValues();
+    
+            borrowForm.addEventListener("submit", async function (event) {
+                event.preventDefault();
+    
+                // Disable the submit button to prevent multiple submissions
+                document.getElementById("submitBtn").disabled = true;
+    
+                const name = document.getElementById("name").value;
+                const email = document.getElementById("email").value;
+                const usernum = document.getElementById("usernum").value;
+                const asset_type = document.getElementById("asset_type").value;
+                const barcode = document.getElementById("barcode").value;
+                const borrow_date = document.getElementById("borrow_date").value;
+                const return_date = document.getElementById("return_date").value;
+    
+                try {
+                    const response = await fetch("/indexborrow", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({ name, email, usernum, asset_type, barcode, borrow_date, return_date }),
+                    });
+    
+                    if (response.ok) {
+                        console.log("Success");
+                        document.getElementById("notification").textContent = "Asset stored successfully.";
+                        borrowForm.reset();
+                        setDefaultDateValues(); // Reset date values after submission
+    
+                        // Display the success message
+                        const successMessage = document.getElementById("successMessage");
+                        successMessage.style.display = "block";
+                        successMessage.style.opacity = "1";
+                        setTimeout(function () {
+                            successMessage.style.opacity = "0";
+                            setTimeout(function () {
+                                successMessage.style.display = "none";
+                            }, 300); // Adjust this time to match your transition duration
+                        }, 2000);
+                    } else {
+                        console.error("Failed to submit asset:", response.status, await response.json());
+                        document.getElementById("notification").textContent = "Failed to submit asset.";
+                    }
+                } catch (error) {
+                    console.error("Error during asset submission:", error);
+                    document.getElementById("notification").textContent = "An error occurred.";
+                } finally {
+                    // Re-enable the submit button after the request is complete
+                    document.getElementById("submitBtn").disabled = false;
+                }
+            });
+    
+            const resetButton = document.getElementById("resetButton");
+    
+            resetButton.addEventListener("click", function () {
+                borrowForm.reset();
+                document.getElementById("notification").textContent = "";
+                setDefaultDateValues();
+            });
+        });
+    
+        history.pushState(null, null, document.URL);
+        window.addEventListener('popstate', function () {
+            history.pushState(null, null, document.URL);
+        });
+    </script>
+    
+</body>
+</html>

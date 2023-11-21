@@ -1,0 +1,54 @@
+/* Style for the page header */
+h1 {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+/* Style for the form */
+.form-control {
+    margin-bottom: 15px;
+}
+
+/* Style for the table */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+}
+
+/* Style for the action buttons */
+.delete-btn {
+    color: #fff;
+}
+
+/* Style for the reset button */
+#resetButton {
+    margin-top: 2px;
+}
+
+/* Style for container */
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.btn-custom {
+    background-color: #007BFF; /* Your desired color */
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 0; /* Remove vertical margin to keep buttons aligned horizontally */
+    padding: 10px 20px;
+    display: inline-block; /* Make buttons display inline to align them horizontally */
+}

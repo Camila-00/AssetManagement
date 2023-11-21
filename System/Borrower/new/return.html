@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Return Asset Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url('bgictc.png');
+            background-size: cover;
+            background-repeat: no-repeat;
+            font-family: Arial, sans-serif;
+            color: rgb(0, 0, 0)525;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 50px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 3px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="date"],
+        select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            background: #fff;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+        .btn-reset {
+            background-color: #f44336;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .btn-back {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        input[type="time"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            background: #fff;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Return Asset Form</h1>
+    <form action="submit_return.php" method="post">
+        <div class="form-group">
+            <label for="asset_type">Asset Type:</label>
+            <select id="asset_type" name="asset_type" class="form-control" required>
+                <option value="Laptop">Laptop</option>
+                <option value="Projector">Projector</option>
+                <option value="Monitor">Monitor</option>
+                <option value="Computer">Computer</option>
+                <option value="Mouse">Mouse</option>
+                <option value="Keyboard">Keyboard</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="barcode">Barcode:</label>
+            <input type="text" id="barcode" name="barcode" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="borrower_name">Borrower's Name:</label>
+            <input type="text" id="borrower_name" name="borrower_name" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="return_time">Return Time:</label>
+            <input type="time" id="return_time" name="return_time" class="form-control" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Return Asset</button>
+        <button type="reset" class="btn btn-reset">Reset</button>
+        <a href="mainboard.html" class="btn btn-back">Back to Dashboard</a>
+    </form>
+</div>
+
+</body>
+</html>

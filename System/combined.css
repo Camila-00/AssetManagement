@@ -1,0 +1,76 @@
+/* Container styles */
+.container {
+    background-color: white;
+    border-radius: 5px;
+    padding: 20px; /* Adjusted padding for the container */
+    max-width: 400px; /* Added max-width to center the login form */
+    margin: 0 auto;
+    text-align: center;
+}
+
+/* Header style */
+h1 {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+/* Form styles */
+form {
+    width: 100%;
+}
+
+fieldset {
+    border: none;
+    padding: 10px 0;
+    text-align: left; /* Adjusted text alignment */
+}
+
+label {
+    display: block;
+    margin: 20px 0 7px;
+    color: gray;
+    text-align: left; /* Adjusted text alignment */
+}
+
+input[type="email"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px; /* Adjusted padding for form inputs */
+    border-radius: 5px;
+    border: 1px solid gray;
+    margin-bottom: 15px;
+}
+
+/* Link styles */
+a {
+    color: gray;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+a:hover {
+    color: darkgray;
+}
+
+/* Submit button style */
+input[type="submit"] {
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #3498db;
+    color: white;
+    transition: background-color 0.3s;
+}
+
+input[type="submit"]:hover {
+    background-color: #2980b9;
+}
+
+/* Error message style */
+#errorMessage {
+    margin-top: 10px;
+    font-weight: bold;
+}

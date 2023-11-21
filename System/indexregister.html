@@ -1,0 +1,117 @@
+<!DOCTYPE html> <!-- FACULTY INDEX REGISTER -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="styleslogin.css">
+
+</head>
+<body>
+  <div class="container">
+      <form id="signupForm" class="register-form">
+          <div class="register-content">
+              <h2>
+                  <img src="DLSUDLOGO.png" alt="logo" width="55" height="55" class="logo"> <!-- Logo -->
+                  Register
+              </h2>
+              <div class="input-group">
+                  <label for="name" class="label-icon">Name:</label>
+                  <input type="text" id="name" name="name" required>
+              </div>
+
+              <div class="input-group">
+                  <label for="email" class="label-icon">Email:</label>
+                  <input type="email" id="email" name="email" required>
+              </div>
+
+              <div class="input-group">
+                  <label for="usernum" class="label-icon">User ID:</label>
+                  <input type="text" id="usernum" name="usernum" required>
+              </div>
+
+              <div class="input-group">
+                  <label for="password" class="label-icon">Password:</label>
+                  <input type="password" id="password" name="password" required>
+              </div>
+
+              <button type="submit">Register</button>
+              <p class="login-text">Have an account already? <a href="borrowerlogin.html">Login here</a></p>
+              <div id="success-message"></div>
+              <div id="error-message"></div>
+          </div>
+          <div class="slideshow-container">
+            <div class="mySlides">
+              <img src="image1.jpg" style="width:120%">
+            </div>
+            <div class="mySlides">
+              <img src="image2.jpg" style="width:120%">
+            </div>
+            <div class="mySlides">
+              <img src="image3.jpg" style="width:120%">
+            </div>
+          </div>
+        </form>
+      </div>
+    <script>
+        // JavaScript for slideshow
+        let slideIndex = 0;
+        showSlides();
+
+        function showSlides() {
+            let i;
+            const slides = document.getElementsByClassName("mySlides");
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            slideIndex++;
+            if (slideIndex > slides.length) { slideIndex = 1; }
+            slides[slideIndex - 1].style.display = "block";
+            setTimeout(showSlides, 2000); // Change image every 2 seconds
+        }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            const successMessage = document.getElementById('success-message');
+            const errorMessage = document.getElementById('error-message');
+            const signupForm = document.getElementById("signupForm");
+
+            signupForm.addEventListener('submit', async (event) => {
+                event.preventDefault();
+
+                try {
+                    // Get values from the form
+                    const name = document.getElementById('name').value;
+                    const email = document.getElementById('email').value;
+                    const usernum = document.getElementById('usernum').value;
+                    const password = document.getElementById('password').value;
+
+                    const response = await fetch('/indexregister', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ name, email, usernum, password }),
+                    });
+
+                    if (response.status === 201) {
+                        successMessage.textContent = "Registration successful. You can now log in.";
+                        successMessage.style.display = "block";
+                        errorMessage.style.display = "none";
+                        signupForm.reset();
+                    } else {
+                        const data = await response.text();
+                        errorMessage.textContent = data;
+                        errorMessage.style.display = "block";
+                        successMessage.style.display = "none";
+                    }
+                } catch (error) {
+                    console.error("Error:", error);
+                    errorMessage.textContent = "An error occurred.";
+                    errorMessage.style.display = "block";
+                    successMessage.style.display = "none";
+                }
+            });
+        });
+    </script>
+</body>
+</html>

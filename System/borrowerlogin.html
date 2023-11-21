@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login Page</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> <!-- Font Awesome CSS -->
+  <link rel="stylesheet" href="styleslogin.css">
+</head>
+<body>
+  <div class="login-container">
+    <form class="login-form" id="loginForm">
+      <h2>
+        <img src="DLSUDLOGO.png" alt="logo" width="55" height="55" class="logo"> <!-- Logo -->
+        Login
+      </h2>
+      <div class="input-group">
+        <label for="usernum" class="label-icon">
+          <i class="fa fa-user"></i> 
+          UserID
+        </label>
+        <input type="text" id="usernum" name="usernum" required>
+      </div>
+      <div class="input-group">
+        <label for="password" class="label-icon">
+          <i class="fa fa-lock"></i> 
+          Password
+        </label>
+        <input type="password" id="password" name="password" required>
+      </div>
+      <button type="submit">Login</button>
+      <p class="signup-text">Don't have an account? <a href="indexregister.html">Sign up</a></p>
+    </form>
+    <div id="errorMessage"></div> <!-- Add an element to display error messages -->
+  </div>
+    
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const loginForm = document.getElementById("loginForm");
+      const errorMessage = document.getElementById("errorMessage");
+      loginForm.addEventListener("submit", async function (event) {
+        event.preventDefault();
+        const usernum = document.getElementById("usernum").value;
+        const password = document.getElementById("password").value;
+
+        try {
+          const response = await fetch("/borrowerlogin", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ usernum, password }),
+          });
+
+          if (response.ok) {
+            window.location.href = "/borrow.html";
+          } else {
+            const errorMessageText = await response.json();
+            errorMessage.textContent = errorMessageText.error;
+          }
+        } catch (error) {
+          console.error("Error during login:", error);
+        }
+      });
+    });
+  </script>
+  
+</body>
+</html>

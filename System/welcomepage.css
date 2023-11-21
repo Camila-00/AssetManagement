@@ -1,0 +1,78 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background-color: #000000; /* Black background */
+}
+  
+  .taskbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #2ecc71; /* Green taskbar */
+    padding: 10px;
+    color: #ffffff;
+  }
+  
+  .brand-link {
+    text-decoration: none;
+    color: #ffffff;
+    font-weight: bold;
+  }
+  
+  .buttons a {
+    margin-left: 15px;
+    text-decoration: none;
+    color: #ffffff;
+    transition: border-bottom 0.3s ease; /* Transition for underline */
+  }
+  
+  /* Hover effect for buttons */
+  .buttons a:hover {
+    border-bottom: 2px solid #ffffff; /* White underline on hover */
+  }
+  
+  /* Slideshow styles */
+  .slideshow-container {
+    max-width: 1000px;
+    position: relative;
+    margin: 20px auto;
+  }
+  
+  .slides img {
+    width: 100%;
+    height: auto;
+    display: none;
+  }
+
+  /* New styles for navbar links */
+  .navbar-brand {
+    display: flex;
+    align-items: center;
+  }
+
+  .navbar-brand img {
+    height: 30px; /* Adjust height as needed */
+    margin-right: 10px;
+  }
+
+  .navbar-nav .nav-link {
+    position: relative;
+    color: #fff;
+    text-decoration: none;
+  }
+
+  .navbar-nav .nav-link::before {
+    content: "";
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: #fff;
+    transition: width 0.3s ease;
+  }
+
+  .navbar-nav .nav-link:hover::before {
+    width: 100%;
+  }

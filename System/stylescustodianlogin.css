@@ -1,0 +1,153 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: url('bgictc.png') no-repeat center center fixed;
+    background-size: cover;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+.container {
+display: flex;
+flex-direction: column;
+align-items: center;
+padding: 0 20px;
+max-width: 400px;
+margin-top: auto;
+margin-bottom: auto;
+}
+
+
+.login-container {
+    width: 100%;
+    padding: 60px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: left;
+    margin-bottom: 30px;
+    color: rgb(0, 0, 0);
+}
+
+h2 {
+    display: flex;
+    align-items: center;
+    color: rgb(0, 0, 0);
+    margin-bottom: 20px;
+}
+
+.logo {
+    margin-right: 10px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    color: rgb(21, 94, 1);
+}
+
+input[type="email"],
+input[type="password"],
+input[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    transition: border-color 0.3s ease-in-out;
+}
+
+input[type="email"]:focus,
+input[type="password"]:focus {
+    outline: none;
+    border-color: #4caf50;
+}
+
+input[type="submit"] {
+    background-color: #4caf50;
+    color: #fff;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+#errorMessage {
+    color: red;
+    margin-bottom: 15px;
+}
+
+.input-group {
+    position: relative;
+    margin-bottom: 15px;
+}
+
+.input-group i {
+    position: absolute;
+    top: 55%;
+    transform: translateY(-50%);
+    left: 10px;
+    color: rgb(39, 169, 3);
+}
+
+.input-group input[type="email"],
+.input-group input[type="password"] {
+    padding-left: 30px;
+}
+
+ /* New styles for navbar links */
+ .navbar-brand {
+    display: flex;
+    align-items: center;
+  }
+
+  .navbar-brand img {
+    height: 30px; /* Adjust height as needed */
+    margin-right: 10px;
+  }
+
+  .navbar-nav .nav-link {
+    position: relative;
+    color: #fff;
+    text-decoration: none;
+  }
+
+  .navbar-nav .nav-link::before {
+    content: "";
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: #fff;
+    transition: width 0.3s ease;
+  }
+
+  .navbar-nav .nav-link:hover::before {
+    width: 100%;
+  }
+
+  .navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 999; /* Set a higher z-index to keep it above other elements */
+    background-color: rgba(0, 0, 0, 0.8); /* Adjust background color or opacity */
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 40px; /* Increase padding for a wider appearance */
+    max-width: 550px; /* Adjust the maximum width as needed */
+    margin-top: 80px;
+    margin-bottom: 20px;
+}

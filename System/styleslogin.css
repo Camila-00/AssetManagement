@@ -1,0 +1,202 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background-color: #ffffff;
+}
+
+.container,
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.login-form {
+  background-color: #ffffff;
+  padding: 50px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 60%; 
+  max-width: 450px; 
+}
+
+
+@media screen and (max-width: 768px) {
+  .login-form {
+    width: 90%; 
+  }
+}
+
+h2 {
+  text-align: left;
+  color: #009e00;
+  font-size: 50px;
+}
+
+.input-group {
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+  color: #333333;
+}
+
+input[type="text"],
+input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: 2px solid #cccccc;
+}
+
+button {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  background-color: #009e00; 
+  color: #ffffff;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #006400; 
+}
+
+.label-icon i {
+  margin-right: 5px; 
+  color: #00c700;
+}
+
+.signup-text {
+  text-align: center;
+  margin-top: 20px;
+  color: #333333;
+}
+
+.signup-text a {
+  color: #009e00; 
+  text-decoration: none;
+}
+
+.signup-text a:hover {
+  text-decoration: underline;
+}
+
+
+
+.register-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.register-form {
+  background-color: #ffffff;
+  padding: 80px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 80%; /* Default width */
+  max-width: 650px; /* Limit maximum width */
+}
+
+/* Media query for smaller screens */
+@media screen and (max-width: 768px) {
+  .register-form {
+    width: 90%; /* Adjust width for smaller screens */
+  }
+}
+
+.input-group {
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+  color: #333333;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="email"] {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: 2px solid #cccccc;
+}
+
+button {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  background-color: #009e00; 
+  color: #ffffff;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #006400; 
+}
+
+.label-icon i {
+  margin-right: 5px; 
+  color: #009e00;
+}
+
+.login-text {
+  text-align: center;
+  margin-top: 20px;
+  color: #333333;
+}
+
+.login-text a {
+  color: #019901; 
+  text-decoration: none;
+}
+
+.login-text a:hover {
+  text-decoration: underline;
+}
+
+.logo
+{
+ 
+vertical-align
+: middle;
+ 
+margin-right
+: 
+px
+; 
+
+}
+
+/* slide show */
+
+
+.register-content {
+width: 45%; /* Adjust width as needed */
+}
+
+.slideshow-container {
+width: 45%; /* Adjust width as needed */
+margin-left: 10%;
+margin-top: 24%;
+}
+
+.mySlides {
+display: none;
+}
+
+.register-form {
+display: flex;
+}

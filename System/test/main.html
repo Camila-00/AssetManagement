@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Tax Calculator</title>
+</head>
+<body>
+  <h1>Tax Calculator</h1>
+  <label for="subtotal">Enter subtotal: </label>
+  <input type="number" id="subtotal"><br>
+  <label for="taxRate">Enter tax rate (as a decimal): </label>
+  <input type="number" id="taxRate"><br>
+  <button onclick="calculateTotal()">Calculate Total</button>
+  <p id="result"></p>
+
+  <script>
+    function calculateTotal() {
+      const subtotal = parseFloat(document.getElementById('subtotal').value);
+      const taxRate = parseFloat(document.getElementById('taxRate').value);
+      const total = subtotal + (subtotal * taxRate);
+
+      document.getElementById('result').innerText = `Total with tax: $${total.toFixed(2)}`;
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,118 @@
+
+  
+body {
+            /* Green gradient background */
+            background: linear-gradient(to bottom, #4CAF50, #2E8B57); /* Change these color codes as needed */
+            color: #fff; /* Text color */
+            font-family: Arial, sans-serif; /* Font family */
+
+           
+        }
+
+ .container {
+            max-width: 600px; /* Adjust container width */
+            background-color: rgba(255, 255, 255, 0.1); /* Semi-transparent container */
+            padding:  40px; /* Add padding */
+            border-radius: 10px; /* Rounded corners */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add shadow */
+            margin: auto; /* Center the container */
+
+            margin-top: 30px;
+
+        }
+        
+
+h1 {
+            font-size: 2.5em; /* Increase heading size */
+            margin-bottom: 30px; /* Add space below heading */
+        }
+
+/* Adjusted styles for form elements */
+input[type="text"],
+input[type="date"],
+select {
+    width: calc(100% - 22px); /* Adjusted input width considering padding and border */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    background: #fff;
+    margin-bottom: 15px;
+}
+
+/* Adjusted button styles */
+.btn-primary,
+.btn-reset,
+.btn-back {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-decoration: none; 
+    display: inline-block;
+}
+
+.btn-primary {
+    background-color: #ffffff;
+    color: #00c939;
+}
+
+.btn-primary:hover {
+    background-color: #01661e;
+    color:#fff
+}
+
+.btn-reset {
+    background-color: #ffffff;
+    color: #00c939;
+}
+
+.btn-reset:hover {
+    background-color: #01661e;
+    color:#fff
+}
+
+.btn-back {
+    background-color: #ffffff;
+    color: #00c939;
+ 
+}
+
+.btn-back:hover {
+    background-color: #01661e;
+    color: #fff;
+    text-decoration: none; 
+}
+
+ /* New styles for navbar links */
+ .navbar-brand {
+    display: flex;
+    align-items: center;
+  }
+
+  .navbar-brand img {
+    height: 30px; /* Adjust height as needed */
+    margin-right: 10px;
+  }
+
+  .navbar-nav .nav-link {
+    position: relative;
+    color: #fff;
+    text-decoration: none;
+  }
+
+  .navbar-nav .nav-link::before {
+    content: "";
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: #fff;
+    transition: width 0.3s ease;
+  }
+
+  .navbar-nav .nav-link:hover::before {
+    width: 100%;
+  }

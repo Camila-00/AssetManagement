@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faculty Dashboard</title>
+    <link rel="stylesheet" href="custodiandashboardpage.css">
+    <link rel="stylesheet" href="print-style.css" media="print">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+    <body>
+        <nav class="navbar">
+            <a class="navbar-brand" href="#">
+                <img src="DLSUDLOGO.png" alt="Logo">
+                ICTC Asset Management
+            </a>
+            <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link" href="indexfacultyhomepage.html">Home</a></li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" id="reportsDropdown" aria-expanded="false">
+                        Reports
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="reportsDropdown">
+                        <li><a class="dropdown-item" href="indexfacultyreport.html">Data</a></li>
+                        <li><a class="dropdown-item" href="indexfacultyreportinput.html">Input</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item"><a class="nav-link" href="indexwelcome.html">Logout</a></li>
+                <li class="nav-item"><a class="nav-link" href="mainboard.html">Renting</a></li>
+            </ul>
+        </nav>
+    
+        
+        <h1>Faculty Dashboard</h1>
+<div class="filter-print-container">
+    <input type="text" id="searchInput" placeholder="Filter">
+    <button class="report-button" onclick="printData()">Print Table</button>
+</div>
+
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Room</th>
+                    <th>Location</th>
+                    <th>Category</th>
+                    <th>Item Description</th>
+                    <th>Bundle</th>
+                    <th>Property Number</th>
+                    <th>Serial Number</th>
+                    <th>Unit Cost</th>
+                    <th>RDF Number</th>
+                    <th>RTF Number</th>
+                    <th>Status</th>
+                    <th>Accountability</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="data-table">
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var reportsDropdown = document.getElementById('reportsDropdown');
+        var dropdownMenu = reportsDropdown.nextElementSibling; // Get the sibling .dropdown-menu
+
+        var mouseInDropdown = false;
+
+        reportsDropdown.addEventListener('click', function (event) {
+            event.preventDefault();
+            dropdownMenu.classList.toggle('show');
+        });
+
+        reportsDropdown.addEventListener('mouseenter', function () {
+            mouseInDropdown = true;
+            dropdownMenu.classList.add('show');
+        });
+
+        dropdownMenu.addEventListener('mouseenter', function () {
+            mouseInDropdown = true;
+            dropdownMenu.classList.add('show');
+        });
+
+        reportsDropdown.addEventListener('mouseleave', function () {
+            mouseInDropdown = false;
+            setTimeout(function () {
+                if (!mouseInDropdown) {
+                    dropdownMenu.classList.remove('show');
+                }
+            }, 200); // Adjust the delay as needed
+        });
+
+        dropdownMenu.addEventListener('mouseleave', function () {
+            mouseInDropdown = false;
+            setTimeout(function () {
+                if (!mouseInDropdown) {
+                    dropdownMenu.classList.remove('show');
+                }
+            }, 200); // Adjust the delay as needed
+        });
+
+        // Close the dropdown when clicking outside the dropdown or the "Reports" button
+        document.addEventListener('click', function (event) {
+            if (!event.target.matches('#reportsDropdown') && !mouseInDropdown) {
+                dropdownMenu.classList.remove('show');
+            }
+        });
+
+        async function fetchData() {
+            try {
+                const response = await fetch('/data');
+                const data = await response.json();
+                console.log('Fetched data:', data);
+
+                const tableBody = document.getElementById('data-table');
+                tableBody.innerHTML = ''; // Clear existing data
+
+                data.forEach((item, index) => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${item.room}</td>
+                        <td>${item.location}</td>
+                        <td>${item.category}</td>
+                        <td>${item.item_description}</td>
+                        <td>${item.bundle}</td>
+                        <td>${item.property_number}</td>
+                        <td>${item.serial_number}</td>
+                        <td>${item.unit_cost}</td>
+                        <td>${item.rdf_number}</td>
+                        <td>${item.rtf_number}</td>
+                        <td>${item.unit_status}</td>
+                        <td>${item.accountability}</td>
+                        <td>
+                            <button onclick="updateRow(${index})">Update</button>
+                            <button onclick="deleteRow(${index})">Delete</button>
+                        </td>
+                    `;
+
+                    tableBody.appendChild(row);
+                });
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        }
+
+        async function updateRow(rowIndex) {
+            try {
+                const response = await fetch(`/assetsupdate/${rowIndex}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        // Include fields you want to update and their new values
+                        // Example: field1: 'new value 1', field2: 'new value 2', ...
+                    }),
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    console.log('Update successful:', result);
+                    // You can update the UI here if needed
+                } else {
+                    console.error('Update failed:', result.message);
+                }
+            } catch (error) {
+                console.error('Error during update:', error);
+            }
+        }
+
+        async function deleteRow(rowIndex) {
+            try {
+                const response = await fetch(`/assetdelete/${rowIndex}`, {
+                    method: 'DELETE',
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    console.log('Delete successful:', result);
+                    // You can update the UI here if needed
+                } else {
+                    console.error('Delete failed:', result.message);
+                }
+            } catch (error) {
+                console.error('Error during delete:', error);
+            }
+        }
+
+        function printData() {
+            const printContent = document.getElementById('data-table').cloneNode(true);
+
+            const cells = printContent.getElementsByTagName('td');
+            for (let i = 0; i < cells.length; i++) {
+                const cell = cells[i];
+                cell.style = '';
+            }
+
+            const printWindow = window.open('', '_blank');
+            printWindow.document.open();
+            printWindow.document.write('<html><head><title>Print</title></head><body>');
+            printWindow.document.write('<h1>Faculty Dashboard - Table</h1>');
+            printWindow.document.write('<table border="1">');
+            printWindow.document.write(printContent.innerHTML);
+            printWindow.document.write('</table>');
+            printWindow.document.write('</body></html>');
+            printWindow.document.close();
+
+            printWindow.onload = function () {
+                printWindow.print();
+                printWindow.onafterprint = function () {
+                    printWindow.close();
+                };
+            };
+        }
+
+        function disableBackButton() {
+            window.history.pushState(null, "", window.location.href);
+            window.onpopstate = function () {
+                window.history.pushState(null, "", window.location.href);
+            };
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            document.getElementById('searchInput').addEventListener('input', function () {
+                const filterValue = this.value.toLowerCase();
+                const rows = document.getElementById('data-table').getElementsByTagName('tr');
+
+                for (let i = 0; i < rows.length; i++) {
+                    const row = rows[i];
+                    const cells = row.getElementsByTagName('td');
+                    let shouldShow = false;
+
+                    for (let j = 0; j < cells.length; j++) {
+                        const cell = cells[j];
+                        if (cell.innerHTML.toLowerCase().indexOf(filterValue) > -1) {
+                            shouldShow = true;
+                            break;
+                        }
+                    }
+
+                    if (shouldShow) {
+                        row.style.display = '';
+                    } else {
+                        row.style.display = 'none';
+                    }
+                }
+            });
+
+            fetchData();
+            disableBackButton();
+        });
+    });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+</body>
+</html>

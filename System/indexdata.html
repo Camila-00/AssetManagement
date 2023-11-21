@@ -1,0 +1,149 @@
+<!DOCTYPE html> <!--FACULTY DASHBOARD, GAWIN MONG DITO MAGDISPLAY NG DATABASE FROM ICTC 201-213-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ICT 201</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+      margin: 0;
+      padding: 0;
+    }
+
+    h1 {
+      background-color: #333;
+      color: #fff;
+      padding: 20px;
+      text-align: center;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 80%;
+      margin: 20px auto;
+      background-color: #fff;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    th, td {
+      border: 1px solid #ddd;
+      padding: 10px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #333;
+      color: #fff;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+
+    tr:hover {
+      background-color: #ddd;
+    }
+
+    .report-button {
+      background-color: #007BFF;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin: 20px auto;
+      display: block;
+    }
+    
+    #searchInput {
+      padding: 10px 20px 10px 10px; /* Adjust the right padding here */
+      margin: 10px auto;
+      width: 80%;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Faculty Dashboard</h1>
+  <input type="text" id="searchInput" placeholder="Filter">
+
+  <table border="1">
+    <thead>
+      <tr>
+        <th>Computer</th>
+        <th>CPU</th>
+        <th>Monitor</th>
+        <th>Keyboard</th>
+        <th>Mouse</th>
+      </tr>
+    </thead>
+    <tbody id="data-table">
+    </tbody>
+  </table>
+
+  <button class="report-button" onclick="location.href='indexinput1.html'">Report System</button>
+  <button class="report-button" onclick="printData()">Print</button>
+
+  <script>
+    async function fetchData() {
+      const response = await fetch('/data');
+      const data = await response.json();
+
+      const tableBody = document.getElementById('data-table');
+
+      data.forEach(item => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>${item.computer}</td>
+          <td>${item.cpu}</td>
+          <td>${item.monitor}</td>
+          <td>${item.keyboard}</td>
+          <td>${item.mouse}</td>
+        `;
+
+        tableBody.appendChild(row);
+      });
+    }
+
+    function printData() {
+      window.print(); // This will trigger the browser's print functionality
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+      // Function to handle search input
+      document.getElementById('searchInput').addEventListener('input', function () {
+        const filterValue = this.value.toLowerCase();
+        const rows = document.getElementById('data-table').getElementsByTagName('tr');
+
+        // Loop through all table rows
+        for (let i = 0; i < rows.length; i++) {
+          const row = rows[i];
+          const cells = row.getElementsByTagName('td');
+          let shouldShow = false;
+
+          // Loop through all table cells in the row
+          for (let j = 0; j < cells.length; j++) {
+            const cell = cells[j];
+            if (cell.innerHTML.toLowerCase().indexOf(filterValue) > -1) {
+              shouldShow = true;
+              break;
+            }
+          }
+
+          // Display or hide the row based on search input
+          if (shouldShow) {
+            row.style.display = '';
+          } else {
+            row.style.display = 'none';
+          }
+        }
+      });
+
+      fetchData(); // Call the fetchData function once the DOM is fully loaded
+    });
+  </script>
+</body>
+</html>

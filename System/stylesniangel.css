@@ -1,0 +1,87 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-image: url('bgictc.png');
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    animation: fadeIn 2s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.container {
+    background-color: white;
+    border-radius: 5px;
+    padding: 50px;
+    width: 300px;
+}
+
+h1 {
+    margin: 0;
+    text-align: center;
+}
+
+
+form {
+    width: 60vw;
+    max-width: 500px;
+    min-width: 300px;
+    margin: 0 auto;
+}
+
+fieldset {
+    border: none;
+    padding: 10px 0;
+}
+
+label {
+    display: block;
+    margin: 20px 0 7px;
+    color: gray;
+}
+
+input {
+    width: 58%;
+    min-height: 2em;
+    border-radius: 5px;
+    background-color: none;
+    border: 1px solid gray;
+}
+
+a {
+    color: gray;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+a:hover {
+    color: darkgray;
+}
+
+input[type="submit"] {
+    cursor: pointer;
+    border: none;
+    border-radius: 0;
+    display: block;
+    width: 58%;
+    min-width: 300px;
+    padding: 10px;;
+    background-color: #3498db;
+    color: white;
+    transition: color 0.3s;
+}
+
+input[type="submit"]:hover {
+    background-color: #2980b9;
+}

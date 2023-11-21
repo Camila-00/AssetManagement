@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> <!-- Font Awesome -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="stylescustodianlogin.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AMS - Asset Management System</title>
+
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-success">
+          <a class="navbar-brand text-white" href="indexwelcome.html">
+            <img src="DLSUDLOGO.png" alt="DLSUD Logo"> 
+            ICTC Asset Management System
+          </a>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item">
+                  <a class="nav-link text-white" href="indexwelcome.html">Home</a>
+                </li>
+              <li class="nav-item">
+                <a class="nav-link text-white" href="indexlogin.html">Login</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-white" href="borrow.html">Renting</a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </header>
+
+    <div class="container">
+        <div class="login-container">
+            <h2>
+                <img src="DLSUDLOGO.png" alt="logo" width="55" height="55" class="logo">
+                <span>ICTC</span>
+            </h2>
+            <h1> LOGIN PAGE FOR CUSTODIAN</h1>
+            
+            <div id="errorMessage"></div>
+            <form id="loginForm">
+                <div class="input-group">
+                    <i class="fas fa-envelope"></i>
+                    <label for="email">Email Address</label>
+                    <input id="email" name="email" type="email" required>
+                </div>
+                <div class="input-group">
+                    <i class="fas fa-lock"></i>
+                    <label for="password">Password</label>
+                    <input id="password" name="password" type="password" required>
+                </div>
+                <input type="submit" value="Login">
+            </form>
+        </div>
+    </div>
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const loginForm = document.getElementById("loginForm");
+            const errorMessage = document.getElementById("errorMessage");
+            loginForm.addEventListener("submit", async function(event) {
+                event.preventDefault();
+                const email = document.getElementById("email").value;
+                const password = document.getElementById("password").value;
+
+                try {
+                    const response = await fetch("/indexlogin", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({ email, password }),
+                    });
+
+                    if (response.ok) {
+                        window.location.href = "/indexfacultyhomepage.html";
+                    } else {
+                        const errorMessageText = await response.json();
+                        errorMessage.textContent = errorMessageText.error;
+                    }
+                } catch (error) {
+                    console.error("Error during login:", error);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
